@@ -5,29 +5,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111a32">
-  <title>IRON FLIGHT | Premium Comic Edition</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+  <title>IRON FLIGHT | Training Simulator</title>
+  <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <main class="shell">
     <header class="masthead">
       <div class="brand">
-        <p class="eyebrow">ORIGINAL HERO SERIES <span>•</span> ISSUE 007</p>
+        <p class="eyebrow">STARK INDUSTRIES • TRAINING DIVISION</p>
         <h1>IRON <em>FLIGHT!</em></h1>
         <p class="subtitle">SUIT UP. TAKE FLIGHT. SAVE THE CITY.</p>
       </div>
       <div class="issue-stamp">
-        <span>PREMIUM</span>
-        <strong>COMIC</strong>
-        <small>EDITION 07</small>
+        <span>DUAL</span>
+        <strong>MODE</strong>
+        <small>EDITION 08</small>
       </div>
     </header>
 
-    <section class="game-card" aria-label="Iron Flight game">
+    <section id="mode-menu" class="mode-menu">
+      <p class="menu-eyebrow">SELECT YOUR TRAINING PROGRAM</p>
+      <h2>CHOOSE YOUR MISSION</h2>
+      <p class="menu-description">
+        Two training programs. One armored hero.
+        Pick your challenge and take flight.
+      </p>
+
+      <div class="mode-grid">
+        <article class="mode-card">
+          <span class="mode-number">MISSION 01</span>
+          <div class="mode-symbol">✹</div>
+          <h3>DRONE ASSAULT</h3>
+          <p>
+            Destroy five hostile drones and survive the
+            Omega Drone boss encounter.
+          </p>
+          <button class="mode-button" data-mode="combat">
+            LAUNCH COMBAT
+          </button>
+        </article>
+
+        <article class="mode-card academy">
+          <span class="mode-number">MISSION 02</span>
+          <div class="mode-symbol">◎</div>
+          <h3>FLIGHT ACADEMY</h3>
+          <p>
+            Fly through eight checkpoints before time runs out.
+            Use your boost to improve your time.
+          </p>
+          <button class="mode-button" data-mode="flight">
+            START FLIGHT TEST
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section id="game-section" class="game-card" hidden>
       <div class="topbar">
-        <span>CHAPTER 01 <b>/</b> DRONE INVASION</span>
-        <span class="online"><i></i> ARMOR SYSTEMS ONLINE</span>
+        <span id="mode-title">CHAPTER 01 / DRONE INVASION</span>
+        <button id="change-mode" class="change-mode">
+          CHANGE MODE
+        </button>
       </div>
 
       <div class="arena">
@@ -35,12 +74,14 @@
           id="game"
           width="960"
           height="540"
-          aria-label="Iron Flight superhero action game"
+          aria-label="Iron Flight game"
         ></canvas>
 
         <div class="hud">
           <div class="hud-box">
-            <div class="hud-heading">ARMOR INTEGRITY</div>
+            <div id="primary-label" class="hud-heading">
+              ARMOR INTEGRITY
+            </div>
             <div class="health-row">
               <div class="meter">
                 <div id="armor-fill" class="meter-fill"></div>
@@ -50,19 +91,21 @@
           </div>
 
           <div class="hud-box mission">
-            <div class="hud-heading">MISSION OBJECTIVE</div>
+            <div class="hud-heading" id="objective-label">
+              MISSION OBJECTIVE
+            </div>
             <strong id="kills-value">0/5</strong>
             <small>BOOST <span id="dash-value">READY</span></small>
           </div>
         </div>
 
-        <div class="version">V0.7 / PREMIUM COMIC</div>
+        <div class="version">V0.8 / DUAL MODE</div>
       </div>
 
       <div class="controls">
         <div><kbd>WASD</kbd> / <kbd>ARROWS</kbd> MOVE</div>
-        <div><kbd>SPACE</kbd> REPULSOR</div>
-        <div><kbd>M</kbd> MISSILE</div>
+        <div id="weapon-control"><kbd>SPACE</kbd> REPULSOR</div>
+        <div id="missile-control"><kbd>M</kbd> MISSILE</div>
         <div><kbd>SHIFT</kbd> BOOST</div>
         <div><kbd>R</kbd> RESTART</div>
       </div>
@@ -73,5 +116,48 @@
       <span>FLASK + JAVASCRIPT CANVAS</span>
     </footer>
   </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get("mode");
+    const validMode = mode === "combat" || mode === "flight";
+
+    document.getElementById("mode-menu").hidden = validMode;
+    document.getElementById("game-section").hidden = !validMode;
+
+    document.querySelectorAll("[data-mode]").forEach(button => {
+      button.addEventListener("click", () => {
+        window.location.search = "?mode=" + button.dataset.mode;
+      });
+    });
+
+    document.getElementById("change-mode").addEventListener("click", () => {
+      window.location.href = window.location.pathname;
+    });
+
+    if (validMode) {
+      const isFlight = mode === "flight";
+
+      document.getElementById("mode-title").textContent =
+        isFlight
+          ? "CHAPTER 02 / FLIGHT ACADEMY"
+          : "CHAPTER 01 / DRONE INVASION";
+
+      if (isFlight) {
+        document.getElementById("primary-label").textContent =
+          "TIME REMAINING";
+        document.getElementById("objective-label").textContent =
+          "CHECKPOINTS";
+        document.getElementById("weapon-control").hidden = true;
+        document.getElementById("missile-control").hidden = true;
+      }
+
+      const script = document.createElement("script");
+      script.src = isFlight
+        ? "{{ url_for('static', filename='js/flight.js') }}"
+        : "{{ url_for('static', filename='js/game.js') }}";
+      document.body.appendChild(script);
+    }
+  </script>
 </body>
 </html>

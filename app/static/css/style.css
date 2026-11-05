@@ -306,3 +306,142 @@ kbd {
   kbd { font-size: 8px; padding: 4px; }
   .footer { flex-direction: column; font-size: 8px; }
 }
+
+/* V0.8 — Game Mode Selection */
+
+[hidden] {
+  display: none !important;
+}
+
+.mode-menu {
+  background: #fff5dd;
+  border: 4px solid #10172a;
+  box-shadow: 9px 9px 0 #070c1a;
+  color: #111a32;
+  padding: 35px 30px 42px;
+  text-align: center;
+}
+
+.menu-eyebrow {
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  color: #b72a3d;
+}
+
+.mode-menu h2 {
+  font: 900 clamp(38px, 6vw, 68px)
+    "Barlow Condensed", Impact, sans-serif;
+  margin: 8px 0;
+}
+
+.menu-description {
+  max-width: 530px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  color: #43506b;
+}
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  text-align: left;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  background: #192747;
+  color: white;
+  border: 4px solid #10172a;
+  box-shadow: 6px 6px 0 #ed5051;
+  padding: 25px;
+  min-height: 300px;
+}
+
+.mode-card.academy {
+  box-shadow: 6px 6px 0 #55cfe5;
+}
+
+.mode-number {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #86efff;
+}
+
+.mode-symbol {
+  font-size: 54px;
+  color: #ffd44c;
+  margin: 14px 0;
+}
+
+.mode-card h3 {
+  font: 900 36px "Barlow Condensed", Impact, sans-serif;
+  margin: 0 0 10px;
+  color: #ffd44c;
+}
+
+.mode-card p {
+  color: #d0d9e9;
+  line-height: 1.6;
+  font-size: 14px;
+  flex: 1;
+}
+
+.mode-button,
+.change-mode {
+  cursor: pointer;
+  border: 3px solid #10172a;
+  font-weight: 900;
+  font-family: inherit;
+}
+
+.mode-button {
+  padding: 15px;
+  background: #ffd44c;
+  color: #10172a;
+  box-shadow: 3px 3px 0 #070c1a;
+}
+
+.mode-button:hover {
+  background: #8ceeff;
+}
+
+.mode-button:focus-visible,
+.change-mode:focus-visible {
+  outline: 3px solid #65eaff;
+  outline-offset: 3px;
+}
+
+.change-mode {
+  padding: 8px 13px;
+  background: #111a32;
+  color: white;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 650px) {
+  .mode-menu {
+    padding: 24px 15px 32px;
+  }
+
+  .mode-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-card {
+    min-height: 240px;
+  }
+
+  .mode-card h3 {
+    font-size: 30px;
+  }
+
+  .change-mode {
+    font-size: 9px;
+    padding: 7px;
+  }
+}
