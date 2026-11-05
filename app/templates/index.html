@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a32">
+  <title>IRON FLIGHT | Premium Comic Edition</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand">
+        <p class="eyebrow">ORIGINAL HERO SERIES <span>•</span> ISSUE 007</p>
+        <h1>IRON <em>FLIGHT!</em></h1>
+        <p class="subtitle">SUIT UP. TAKE FLIGHT. SAVE THE CITY.</p>
+      </div>
+      <div class="issue-stamp">
+        <span>PREMIUM</span>
+        <strong>COMIC</strong>
+        <small>EDITION 07</small>
+      </div>
+    </header>
+
+    <section class="game-card" aria-label="Iron Flight game">
+      <div class="topbar">
+        <span>CHAPTER 01 <b>/</b> DRONE INVASION</span>
+        <span class="online"><i></i> ARMOR SYSTEMS ONLINE</span>
+      </div>
+
+      <div class="arena">
+        <canvas
+          id="game"
+          width="960"
+          height="540"
+          aria-label="Iron Flight superhero action game"
+        ></canvas>
+
+        <div class="hud">
+          <div class="hud-box">
+            <div class="hud-heading">ARMOR INTEGRITY</div>
+            <div class="health-row">
+              <div class="meter">
+                <div id="armor-fill" class="meter-fill"></div>
+              </div>
+              <strong id="armor-value">100%</strong>
+            </div>
+          </div>
+
+          <div class="hud-box mission">
+            <div class="hud-heading">MISSION OBJECTIVE</div>
+            <strong id="kills-value">0/5</strong>
+            <small>BOOST <span id="dash-value">READY</span></small>
+          </div>
+        </div>
+
+        <div class="version">V0.7 / PREMIUM COMIC</div>
+      </div>
+
+      <div class="controls">
+        <div><kbd>WASD</kbd> / <kbd>ARROWS</kbd> MOVE</div>
+        <div><kbd>SPACE</kbd> REPULSOR</div>
+        <div><kbd>M</kbd> MISSILE</div>
+        <div><kbd>SHIFT</kbd> BOOST</div>
+        <div><kbd>R</kbd> RESTART</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>IRON FLIGHT — ORIGINAL STUDENT GAME PROJECT</span>
+      <span>FLASK + JAVASCRIPT CANVAS</span>
+    </footer>
+  </main>
+</body>
+</html>

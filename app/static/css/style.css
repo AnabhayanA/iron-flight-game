@@ -1,0 +1,308 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;600;700;800&display=swap');
+
+:root {
+  --ink: #111a32;
+  --navy: #192747;
+  --cream: #fff5dd;
+  --yellow: #ffd44c;
+  --red: #ec4d53;
+  --cyan: #65eaff;
+  --line: #10172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% -10%, #31446b, transparent 55%),
+    radial-gradient(#2a395c 1px, transparent 1px),
+    #111a32;
+  background-size: auto, 20px 20px, auto;
+  color: var(--cream);
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+.shell {
+  width: min(1120px, 95%);
+  margin: 25px auto 40px;
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 5px 25px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.eyebrow span {
+  color: var(--yellow);
+}
+
+h1 {
+  margin: 0;
+  font: 900 clamp(52px, 9vw, 104px)/.88 "Barlow Condensed", Impact, sans-serif;
+  letter-spacing: -1px;
+  text-shadow: 5px 5px 0 #080e20;
+}
+
+h1 em {
+  color: var(--yellow);
+  font-style: normal;
+}
+
+.subtitle {
+  margin: 15px 0 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.issue-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 125px;
+  padding: 14px 18px;
+  border: 4px solid var(--line);
+  background: var(--yellow);
+  box-shadow: 6px 6px 0 var(--red);
+  color: var(--ink);
+  transform: rotate(5deg);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+}
+
+.issue-stamp span {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.issue-stamp strong {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.issue-stamp small {
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.game-card {
+  overflow: hidden;
+  border: 4px solid var(--line);
+  background: var(--cream);
+  box-shadow: 9px 9px 0 #070c1a, 0 20px 55px #0005;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-bottom: 4px solid var(--line);
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.topbar b {
+  margin: 0 5px;
+  color: #a33d37;
+}
+
+.online {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.online i {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: #38d990;
+  box-shadow: 0 0 9px #38d990;
+}
+
+.arena {
+  position: relative;
+  overflow: hidden;
+  background: #7bc7e7;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.hud {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.hud-box {
+  min-width: 180px;
+  padding: 10px 13px;
+  border: 3px solid var(--line);
+  background: rgba(255, 247, 226, .97);
+  box-shadow: 4px 4px 0 var(--line);
+  color: var(--ink);
+}
+
+.hud-heading {
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.health-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.meter {
+  width: 122px;
+  height: 15px;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  background: #e7e2d6;
+}
+
+.meter-fill {
+  width: 100%;
+  height: 100%;
+  background: #3bd68d;
+  transition: width .15s, background .15s;
+}
+
+.health-row strong {
+  font: 900 20px "Barlow Condensed", Impact, sans-serif;
+}
+
+.mission {
+  min-width: 155px;
+  background: rgba(111, 235, 255, .97);
+}
+
+.mission strong {
+  display: block;
+  font: 900 26px "Barlow Condensed", Impact, sans-serif;
+}
+
+.mission small {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.version {
+  position: absolute;
+  right: 13px;
+  bottom: 13px;
+  padding: 6px 9px;
+  border: 2px solid var(--line);
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  transform: rotate(-2deg);
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
+  border-top: 4px solid var(--line);
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .4px;
+}
+
+.controls > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+kbd {
+  display: inline-block;
+  padding: 6px 8px;
+  border: 2px solid var(--line);
+  background: white;
+  box-shadow: 2px 2px 0 var(--line);
+  color: var(--ink);
+  font: 800 10px "DM Sans", sans-serif;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 23px;
+  color: #aab9d4;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 650px) {
+  .shell { width: 97%; margin-top: 12px; }
+  .masthead { gap: 10px; padding-bottom: 18px; }
+  .eyebrow { font-size: 8px; letter-spacing: 1px; }
+  .subtitle { font-size: 8px; letter-spacing: 1px; }
+  .issue-stamp { min-width: 70px; padding: 8px; border-width: 3px; }
+  .issue-stamp span { font-size: 9px; }
+  .issue-stamp strong { font-size: 21px; }
+  .issue-stamp small { font-size: 9px; }
+  .topbar { padding: 9px; font-size: 9px; letter-spacing: .3px; }
+  .online { font-size: 8px; }
+  .hud { top: 7px; left: 7px; right: 7px; }
+  .hud-box { min-width: 0; padding: 5px 6px; border-width: 2px; box-shadow: 2px 2px 0 var(--line); }
+  .hud-heading { font-size: 7px; margin-bottom: 3px; letter-spacing: .2px; }
+  .meter { width: 44px; height: 9px; }
+  .health-row strong { font-size: 11px; }
+  .mission strong { font-size: 14px; }
+  .mission small { font-size: 8px; }
+  .version { right: 5px; bottom: 5px; padding: 3px 5px; font-size: 7px; }
+  .controls { padding: 10px; gap: 10px; font-size: 9px; }
+  kbd { font-size: 8px; padding: 4px; }
+  .footer { flex-direction: column; font-size: 8px; }
+}
