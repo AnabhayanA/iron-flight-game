@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>IRON FLIGHT | Stark Training Simulator</title>
+
+  <link rel="stylesheet"
+    href="static/css/style.css">
+
+  <link rel="stylesheet"
+    href="static/css/flight-theme.css">
+
+  <link rel="stylesheet"
+    href="static/css/jarvis.css">
+</head>
+
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand">
+        <p class="eyebrow">
+          STARK INDUSTRIES • TRAINING DIVISION
+        </p>
+        <h1>IRON <em>FLIGHT!</em></h1>
+        <p class="subtitle">
+          SUIT UP. TAKE FLIGHT. SAVE THE CITY.
+        </p>
+      </div>
+
+      <div class="issue-stamp">
+        <span>DUAL</span>
+        <strong>MODE</strong>
+        <small>EDITION 10</small>
+      </div>
+    </header>
+
+    <section id="mode-menu" class="mode-menu">
+      <p class="menu-eyebrow">
+        SELECT YOUR TRAINING PROGRAM
+      </p>
+      <h2>CHOOSE YOUR MISSION</h2>
+      <p class="menu-description">
+        Two training programs. One armored hero.
+        Pick your challenge and take flight.
+      </p>
+
+      <div class="mode-grid">
+        <article class="mode-card">
+          <span class="mode-number">MISSION 01</span>
+          <div class="mode-symbol">✹</div>
+          <h3>DRONE ASSAULT</h3>
+          <p>
+            Destroy five hostile drones and survive
+            the Omega Drone boss encounter.
+          </p>
+          <button class="mode-button" data-mode="combat">
+            LAUNCH COMBAT
+          </button>
+        </article>
+
+        <article class="mode-card academy">
+          <span class="mode-number">MISSION 02</span>
+          <div class="mode-symbol">◎</div>
+          <h3>FLIGHT ACADEMY</h3>
+          <p>
+            Fly through eight checkpoints before time
+            runs out.
+          </p>
+          <button class="mode-button" data-mode="flight">
+            START FLIGHT TEST
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section id="game-section" class="game-card" hidden>
+      <div class="topbar">
+        <span id="mode-title">
+          CHAPTER 01 / DRONE INVASION
+        </span>
+        <button id="change-mode" class="change-mode">
+          CHANGE MODE
+        </button>
+      </div>
+
+      <div class="arena">
+        <canvas
+          id="game"
+          width="960"
+          height="540"
+          aria-label="Iron Flight game">
+        </canvas>
+
+        <div class="hud">
+          <div class="hud-box">
+            <div id="primary-label" class="hud-heading">
+              ARMOR INTEGRITY
+            </div>
+            <div class="health-row">
+              <div class="meter">
+                <div id="armor-fill" class="meter-fill"></div>
+              </div>
+              <strong id="armor-value">100%</strong>
+            </div>
+          </div>
+
+          <div class="hud-box mission">
+            <div id="objective-label" class="hud-heading">
+              MISSION OBJECTIVE
+            </div>
+            <strong id="kills-value">0/5</strong>
+            <small>
+              BOOST <span id="dash-value">READY</span>
+            </small>
+          </div>
+        </div>
+
+        <div class="version">V1.1 / ADVANCED COMBAT</div>
+      </div>
+
+      <div class="controls">
+        <div>
+          <kbd>WASD</kbd> /
+          <kbd>ARROWS</kbd> MOVE
+        </div>
+        <div id="weapon-control">
+          <kbd>SPACE</kbd> REPULSOR
+        </div>
+        <div id="missile-control">
+          <kbd>M</kbd> MISSILE
+        </div>
+        <div id="beam-control" hidden>
+          <kbd>B</kbd> CHEST BEAM
+        </div>
+        <div id="shield-control" hidden>
+          <kbd>E</kbd> SHIELD
+        </div>
+        <div id="charge-control" hidden>
+          <kbd>C</kbd> CHARGED SHOT
+        </div>
+        <div>
+          <kbd>SHIFT</kbd> BOOST
+        </div>
+        <div>
+          <kbd>R</kbd> RESTART
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="jarvis-panel"
+      class="jarvis-panel"
+      data-level="info"
+      aria-label="JARVIS mission assistant"
+      hidden>
+
+      <div class="jarvis-header">
+        <div class="jarvis-identity">
+          <div class="jarvis-reactor" aria-hidden="true">✦</div>
+          <div>
+            <div class="jarvis-name">J.A.R.V.I.S.</div>
+            <div class="jarvis-subtitle">
+              MISSION ASSISTANT // ONLINE
+            </div>
+          </div>
+        </div>
+
+        <div class="jarvis-actions">
+          <button
+            id="jarvis-voice"
+            type="button"
+            aria-pressed="false">
+            VOICE OFF
+          </button>
+          <button
+            id="jarvis-minimize"
+            type="button"
+            aria-label="Minimize JARVIS">
+            −
+          </button>
+        </div>
+      </div>
+
+      <div class="jarvis-body">
+        <div class="jarvis-status-row">
+          <span class="jarvis-live-dot"></span>
+          <span class="jarvis-status-label">
+            LIVE SYSTEM REPORT
+          </span>
+          <span id="jarvis-status" class="jarvis-status">
+            ONLINE
+          </span>
+        </div>
+
+        <p
+          id="jarvis-message"
+          class="jarvis-message"
+          role="status"
+          aria-live="polite">
+          Initializing mission assistant...
+        </p>
+
+        <div id="jarvis-history" class="jarvis-history"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>
+        IRON FLIGHT — ORIGINAL STUDENT GAME PROJECT
+      </span>
+      <span>GITHUB PAGES DEMO + JAVASCRIPT CANVAS</span>
+    </footer>
+  </main>
+
+  <script src="static/js/armor-model.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const mode = params.get("mode");
+    const validMode = mode === "combat" || mode === "flight";
+
+    document.body.classList.toggle(
+      "flight-mode",
+      mode === "flight"
+    );
+
+    document.getElementById("mode-menu").hidden = validMode;
+    document.getElementById("game-section").hidden = !validMode;
+    document.getElementById("jarvis-panel").hidden = !validMode;
+
+    document.querySelectorAll("[data-mode]").forEach(button => {
+      button.addEventListener("click", () => {
+        window.location.search = "?mode=" + button.dataset.mode;
+      });
+    });
+
+    document.getElementById("change-mode")
+      .addEventListener("click", () => {
+        window.location.href = window.location.pathname;
+      });
+
+    if (validMode) {
+      const isFlight = mode === "flight";
+
+      document.getElementById("mode-title").textContent =
+        isFlight
+          ? "CHAPTER 02 / FLIGHT ACADEMY"
+          : "CHAPTER 01 / DRONE INVASION";
+
+      if (isFlight) {
+        document.getElementById("primary-label").textContent =
+          "TIME REMAINING";
+
+        document.getElementById("objective-label").textContent =
+          "CHECKPOINTS";
+
+        document.getElementById("weapon-control").hidden = true;
+        document.getElementById("missile-control").hidden = true;
+      } else {
+        document.getElementById("beam-control").hidden = false;
+        document.getElementById("shield-control").hidden = false;
+        document.getElementById("charge-control").hidden = false;
+      }
+
+      function loadScript(path) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = path;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.body.appendChild(script);
+        });
+      }
+
+    
+
+      async function startGame() {
+        try {
+          // Load the original game first.
+          await loadScript(
+            isFlight
+              ? "static/js/flight.js"
+              : "static/js/game.js"
+          );
+
+          // Load JARVIS independently.
+          try {
+            await loadScript(
+              "static/js/jarvis.js"
+            );
+            console.log("JARVIS script loaded.");
+          } catch (error) {
+            console.error("JARVIS failed to load:", error);
+          }
+
+          // Load combat upgrades only in Drone Assault.
+          if (!isFlight) {
+            try {
+              await loadScript(
+                "static/js/combat-upgrades.js"
+              );
+              console.log("Combat upgrade script loaded.");
+            } catch (error) {
+              console.error("Combat upgrades failed to load:", error);
+            }
+          }
+
+        } catch (error) {
+          console.error("Failed to load Iron Flight:", error);
+        }
+      }
+
+      // Start the selected game mode.
+      startGame();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+
+/* IRON FLIGHT — JARVIS Mission Assistant */
+
+.jarvis-panel {
+  position: relative;
+  margin-top: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(106, 226, 247, .5);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, #0a182b, #142940);
+  color: #e8f8ff;
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, .3),
+    inset 0 0 30px rgba(75, 220, 247, .04);
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+.jarvis-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #5ee7ff,
+    #e8b966,
+    #5ee7ff,
+    transparent
+  );
+}
+
+.jarvis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 13px 17px;
+  border-bottom: 1px solid rgba(101, 220, 245, .17);
+}
+
+.jarvis-identity {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.jarvis-reactor {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #5de7fa;
+  border-radius: 50%;
+  box-shadow:
+    0 0 14px rgba(93, 231, 250, .35),
+    inset 0 0 12px rgba(93, 231, 250, .2);
+  color: #aaf7ff;
+  font-size: 19px;
+}
+
+.jarvis-name {
+  color: #a3f2ff;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.jarvis-subtitle {
+  margin-top: 2px;
+  color: #91adbf;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.jarvis-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.jarvis-actions button {
+  cursor: pointer;
+  border: 1px solid #456b81;
+  border-radius: 4px;
+  padding: 8px 11px;
+  background: #1b344a;
+  color: #c8f6ff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .7px;
+}
+
+.jarvis-actions button:hover {
+  border-color: #7beeff;
+  background: #284b63;
+}
+
+.jarvis-actions button:focus-visible {
+  outline: 2px solid #f2cb81;
+  outline-offset: 2px;
+}
+
+.jarvis-actions button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.jarvis-body {
+  padding: 18px;
+}
+
+.jarvis-status-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+}
+
+.jarvis-live-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #69ebd4;
+  box-shadow: 0 0 12px #69ebd4;
+}
+
+.jarvis-status-label {
+  color: #92aebd;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.jarvis-status {
+  margin-left: auto;
+  color: #72edcf;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.jarvis-message {
+  min-height: 44px;
+  margin: 0;
+  color: #f1f7fc;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.jarvis-history {
+  display: grid;
+  gap: 9px;
+  margin-top: 15px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(101, 220, 245, .16);
+}
+
+.jarvis-log-entry {
+  display: grid;
+  grid-template-columns: 65px 1fr;
+  gap: 12px;
+  color: #8eafc1;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.jarvis-log-entry span:first-child {
+  color: #e0bb78;
+  font-weight: 800;
+}
+
+.jarvis-panel[data-level="warning"] .jarvis-status {
+  color: #f4c66e;
+}
+
+.jarvis-panel[data-level="danger"] .jarvis-status {
+  color: #ff858a;
+}
+
+.jarvis-panel[data-level="danger"] .jarvis-live-dot {
+  background: #ff6676;
+  box-shadow: 0 0 14px #ff6676;
+}
+
+.jarvis-panel[data-level="success"] .jarvis-status {
+  color: #72edcf;
+}
+
+.jarvis-pulse {
+  animation: jarvis-flash .65s ease-out;
+}
+
+@keyframes jarvis-flash {
+  0% {
+    box-shadow: 0 0 30px rgba(96, 233, 255, .45);
+  }
+  100% {
+    box-shadow: 0 10px 35px rgba(0, 0, 0, .3);
+  }
+}
+
+.jarvis-minimized .jarvis-body {
+  display: none;
+}
+
+.jarvis-minimized .jarvis-header {
+  border-bottom: none;
+}
+
+@media (max-width: 650px) {
+  .jarvis-header {
+    padding: 12px;
+  }
+
+  .jarvis-name {
+    font-size: 19px;
+  }
+
+  .jarvis-reactor {
+    width: 33px;
+    height: 33px;
+  }
+
+  .jarvis-body {
+    padding: 13px;
+  }
+
+  .jarvis-message {
+    font-size: 12px;
+  }
+
+  .jarvis-actions button {
+    font-size: 9px;
+    padding: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jarvis-pulse {
+    animation: none;
+  }
+}
