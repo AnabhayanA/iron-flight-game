@@ -635,6 +635,7 @@ function background(t) {
 
 // Sleek red-and-gold armor with metallic highlights.
 function drawHero(t) {
+  if (window.AurelArmor?.draw(ctx, hero, t, hero.dashTime > 0)) return;
   if (hero.inv > 0 && Math.floor(t / 75) % 2 === 0) return;
 
   ctx.save();
@@ -996,21 +997,87 @@ function drawCombatHUD() {
   }
 }
 
+
 function overlay() {
-  if (state==="playing") return;
+  if (state === "playing") return;
 
-  box(0,0,W,H,"rgba(11,16,37,.79)");
+  ctx.save();
 
-  const won=state==="won";
-  words(won?"MISSION COMPLETE!":"MISSION FAILED!",
-    W/2,235,72,won?"#ffe05c":"#ff7171");
+  // Darken the battlefield
+  box(0, 0, W, H, "rgba(4, 9, 22, 0.88)");
 
-  words(won?"THE CITY IS SAFE!":"ARMOR SYSTEMS OFFLINE",
-    W/2,285,28,"#fff");
+  const won = state === "won";
 
-  box(W/2-165,321,330,57,"#ffd44c","#10152b",4);
-  words("PRESS R TO RESTART",W/2,360,28,"#10152b");
+  // Main mission panel
+  const panelX = W / 2 - 265;
+  const panelY = 143;
+  const panelW = 530;
+  const panelH = 257;
+
+  box(panelX, panelY, panelW, panelH, "#101d32");
+
+  ctx.strokeStyle = "#b53645";
+  ctx.lineWidth = 4;
+  ctx.strokeRect(panelX, panelY, panelW, panelH);
+
+  // Gold accent
+  box(panelX, panelY, panelW, 6, "#e8b761");
+
+  // Panel header
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#74e7f2";
+  ctx.font = "bold 15px Arial";
+
+  ctx.fillText(
+    "STARK INDUSTRIES / COMBAT SYSTEMS",
+    W / 2,
+    182
+  );
+
+  // Victory or defeat title
+  ctx.fillStyle = won ? "#f4d185" : "#ff8181";
+  ctx.font = "bold 41px Arial";
+
+  ctx.fillText(
+    won ? "MISSION COMPLETE" : "MISSION FAILED",
+    W / 2,
+    244
+  );
+
+  // Mission result
+  ctx.fillStyle = "#f5f1e8";
+  ctx.font = "bold 21px Arial";
+
+  ctx.fillText(
+    won ? "OMEGA DRONE DEFEATED" : "ARMOR SYSTEMS OFFLINE",
+    W / 2,
+    296
+  );
+
+  // High-contrast restart button
+  ctx.shadowColor = "rgba(239, 72, 82, 0.55)";
+  ctx.shadowBlur = 18;
+
+  box(W / 2 - 155, 329, 310, 50, "#a82035");
+
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = "#f4cb78";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(W / 2 - 155, 329, 310, 50);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 21px Arial";
+
+  ctx.fillText(
+    "PRESS R TO RESTART",
+    W / 2,
+    354
+  );
+
+  ctx.restore();
 }
+
 
 function render(t) {
   ctx.clearRect(0,0,W,H);

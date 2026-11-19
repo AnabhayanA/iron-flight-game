@@ -1,0 +1,102 @@
+
+/* Flight Academy theme only */
+
+body.flight-mode {
+  background: radial-gradient(
+    circle at 55% -20%,
+    #243c55,
+    transparent 52%
+  ), #080f1d;
+}
+
+.flight-mode .eyebrow,
+.flight-mode .mode-number {
+  color: #75e5ef;
+}
+
+.flight-mode h1 em {
+  color: #e9bb68;
+}
+
+.flight-mode .issue-stamp {
+  background: #a62a3d;
+  color: #fff4dc;
+  box-shadow: 6px 6px 0 #c69b56;
+}
+
+.flight-mode .game-card {
+  background: #0c172b;
+  box-shadow: 8px 8px 0 #060b15, 0 22px 55px #0008;
+}
+
+.flight-mode .topbar {
+  background: #131f34;
+  color: #f4dba8;
+  border-bottom-color: #b13a48;
+}
+
+.flight-mode .change-mode {
+  background: #b33848;
+  color: #fff6e8;
+  border-color: #080f1d;
+}
+
+.flight-mode .change-mode:hover {
+  background: #d04b59;
+}
+
+.flight-mode .arena {
+  background: #091527;
+}
+
+.flight-mode .hud-box {
+  background: rgba(9, 23, 43, .90);
+  border: 2px solid #3c7087;
+  box-shadow: 0 0 0 1px #071121, 0 8px 22px #0007;
+  color: #f3f1e8;
+}
+
+.flight-mode .hud-heading {
+  color: #80e4ed;
+}
+
+.flight-mode .meter {
+  border-color: #557c8a;
+  background: #263347;
+}
+
+.flight-mode .mission {
+  background: rgba(13, 29, 49, .93);
+  border-color: #c09a59;
+}
+
+.flight-mode .mission strong {
+  color: #f2cf8c;
+}
+
+.flight-mode .mission small {
+  color: #bce9ef;
+}
+
+.flight-mode .version {
+  background: #a62a3d;
+  color: #fff3df;
+  border-color: #091020;
+}
+
+.flight-mode .controls {
+  background: #101d31;
+  color: #d8e6ee;
+  border-top-color: #b13a48;
+}
+
+.flight-mode kbd {
+  background: #22334c;
+  color: #f4dba8;
+  border-color: #66899a;
+  box-shadow: none;
+}
+
+.flight-mode .footer {
+  color: #8da7b8;
+}
