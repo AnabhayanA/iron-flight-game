@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Iron Flight</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#151f2a;color:#e9f4fc;font:15px system-ui,sans-serif;overflow:hidden}
+  canvas{display:block}
+  #hud{position:absolute;top:22px;left:22px;pointer-events:none;text-shadow:0 1px 4px #101820}
+  h1{margin:0 0 6px;font-size:24px;letter-spacing:.12em}
+  #status{font-weight:650}
+  #controls{position:absolute;bottom:20px;left:22px;right:22px;pointer-events:none;text-shadow:0 1px 4px #101820}
+  #reticle{position:absolute;top:50%;left:50%;width:12px;height:12px;border:2px solid white;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 4px #172b3f;pointer-events:none}
+  #enter{position:absolute;top:62%;left:50%;transform:translateX(-50%);padding:12px 20px;color:white;background:#183044;border:1px solid #91c9df;border-radius:6px;font:inherit;cursor:pointer;white-space:nowrap}
+  [hidden]{display:none}
+</style>
+<script type="importmap">
+{"imports":{"three":"/three/three.module.js"}}
+</script>
+<div id="hud"><h1>IRON FLIGHT</h1><div id="status" role="status">Loading V004 armor...</div></div>
+<div id="reticle" hidden></div>
+<button id="enter" hidden>Click to play</button>
+<div id="controls">WASD / Arrows Move &middot; Shift Run / Boost &middot; Space Jump / Ascend &middot; Ctrl Descend &middot; F Toggle flight &middot; Click Fire &middot; Esc Release mouse</div>
+<script type="module" src="/game.js"></script>
+</html>
