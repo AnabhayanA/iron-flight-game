@@ -1,14 +1,28 @@
+# Blender backup and temporary files
+*.blend[0-9]*
+*.blend@
+*.blend~
+.blender/
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .venv/
 venv/
-__pycache__/
-*.pyc
-.pytest_cache/
+env/
+
+# Environment secrets
 .env
 .env.*
 !.env.example
-instance/
-*.db
-*.sqlite
-*.sqlite3
-.coverage
-htmlcov/
+
+# Generated temporary files
+*.tmp
+*.temp
+*.swp
+*.log
+tmp/
+temp/

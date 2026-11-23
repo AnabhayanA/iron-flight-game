@@ -1,6 +1,0 @@
-{
-  "height_m": 1.85,
-  "mesh_objects": 191,
-  "joint_nodes": 55,
-  "notes": "Custom lofts and crowned polygon panels; rigid articulated hierarchy; procedural microfinish is Blender-only, GLB uses PBR constants."
-}
